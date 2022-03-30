@@ -211,7 +211,7 @@ impl Buffer {
     }
 }
 
-#[derive(Clone, Copy, Eq, PartialEq, scale_info::TypeInfo)]
+#[derive(Clone, Copy, Eq, PartialEq)]
 enum Radix {
     Bin,
     Oct,

@@ -84,7 +84,7 @@ The conversions supported cover the following cases.
 ## Quick examples
 
 ```rust
-use axlib_fixed::types::I20F12;
+use substrate_fixed::types::I20F12;
 
 // 19/3 = 6 1/3
 let six_and_third = I20F12::from_num(19) / 3;
@@ -104,7 +104,7 @@ combinations of integer and fractional bits adding up to a total of
 eight, 16, 32, 64 or 128 bits.
 
 ```rust
-use axlib_fixed::types::{I4F4, I4F12};
+use substrate_fixed::types::{I4F4, I4F12};
 
 // −8 ≤ I4F4 < 8 with steps of 1/16 (~0.06)
 let a = I4F4::from_num(1);
@@ -292,7 +292,7 @@ use core::{
 ///
 /// ```
 /// # #[allow(unused_imports)]
-/// use axlib_fixed::prelude::*;
+/// use substrate_fixed::prelude::*;
 /// ```
 ///
 /// The prelude may grow over time as additional items see ubiquitous use.
@@ -311,7 +311,7 @@ mod macros_no_frac;
 #[macro_use]
 mod macros_frac;
 
-use codec::{Decode, Encode, MaxEncodedLen};
+use codec::{Decode, Encode};
 macro_rules! fixed {
     (
         $description:expr,
@@ -345,7 +345,7 @@ are implemented by the Rust compiler.
 # Examples
 
 ```rust
-use axlib_fixed::{types::extra::U3, ", $s_fixed, "};
+use substrate_fixed::{types::extra::U3, ", $s_fixed, "};
 let eleven = ", $s_fixed, "::<U3>::from_num(11);
 assert_eq!(eleven, ", $s_fixed, "::<U3>::from_bits(11 << 3));
 assert_eq!(eleven, 11);
@@ -361,7 +361,7 @@ assert_eq!(two_point_75.to_string(), \"2.8\");
 [typenum crate]: https://crates.io/crates/typenum
 ";
             #[repr(transparent)]
-            #[derive(Encode, Decode, scale_info::TypeInfo, MaxEncodedLen)]
+            #[derive(Encode, Decode)]
             pub struct $Fixed<Frac> {
                 bits: $Inner,
                 phantom: PhantomData<Frac>,
@@ -493,14 +493,7 @@ extern crate approx;
 #[cfg(test)]
 #[allow(clippy::cognitive_complexity)]
 mod tests {
-    use crate::types::{I0F32, I16F16, I1F31, U0F32, U16F16, I64F64};
-    use scale_info::TypeInfo;
-
-    #[test]
-    fn scale_info_works() {
-        // suffices if this test compiles
-        I64F64::type_info();
-    }
+    use crate::types::{I0F32, I16F16, I1F31, U0F32, U16F16};
 
     #[test]
     fn rounding_signed() {

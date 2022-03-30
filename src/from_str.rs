@@ -502,7 +502,7 @@ fn div_tie(dividend_hi: u128, dividend_lo: u128, divisor: u128) -> (u128, bool) 
     (lo, rem == 0)
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, scale_info::TypeInfo)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 struct Parse<'a> {
     neg: bool,
     int: &'a [u8],
@@ -515,7 +515,7 @@ An error which can be returned when parsing a fixed-point number.
 # Examples
 
 ```rust
-use axlib_fixed::{types::I16F16, ParseFixedError};
+use substrate_fixed::{types::I16F16, ParseFixedError};
 // This string is not a fixed-point number.
 let s = "something completely different (_!_!_)";
 let error: ParseFixedError = match s.parse::<I16F16>() {
@@ -525,12 +525,12 @@ let error: ParseFixedError = match s.parse::<I16F16>() {
 println!("Parse error: {}", error);
 ```
 */
-#[derive(Clone, Copy, Debug, PartialEq, Eq, scale_info::TypeInfo)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct ParseFixedError {
     kind: ParseErrorKind,
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, scale_info::TypeInfo)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum ParseErrorKind {
     InvalidDigit,
     NoDigits,
